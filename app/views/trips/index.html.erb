@@ -1,5 +1,26 @@
 <div class="row">
   <div class="col-md-12">
-    <h1>Index</h1>
+    <h1>Trips</h1>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <%= form_tag('trips/search', method: :get) do %>
+      <div class="row">
+	<div class="col-md-3">
+	  <%= select(:trip, :start_airport_id, @start_airports, {}, {:class => 'form-control'}) %>
+	</div>
+	<div class="col-md-3">
+	  <%= select(:trip, :finish_airport_id, @finish_airports, {}, {:class => 'form-control'}) %>
+	</div>
+	<div class="col-md-3">
+	  <%= select(:trip, :passengers, @passengers, {}, {:class => 'form-control'}) %>
+	</div>
+	<div class="col-md-3">
+	  <%= select(:trip, :start_time, @dates, {}, {:class => 'form-control'}) %>
+	</div>
+      </div>
+    <% end %>
+    <%= debug @start_airports %>
   </div>
 </div>
