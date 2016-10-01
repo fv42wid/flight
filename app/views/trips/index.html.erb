@@ -5,22 +5,49 @@
 </div>
 <div class="row">
   <div class="col-md-12">
-    <%= form_tag('trips/search', method: :get) do %>
+    <%= form_tag('/', method: :get) do %>
       <div class="row">
 	<div class="col-md-3">
-	  <%= select(:trip, :start_airport_id, @start_airports, {}, {:class => 'form-control'}) %>
+	  <%= select(:trip, :start_airport_id, @start_airports, {include_blank: true, selected: params[:trip][:start_airport_id]}, {:class => 'form-control'}) %>
 	</div>
 	<div class="col-md-3">
-	  <%= select(:trip, :finish_airport_id, @finish_airports, {}, {:class => 'form-control'}) %>
+	  <%= select(:trip, :finish_airport_id, @finish_airports, {include_blank: true, selected: params[:trip][:finish_airport_id]}, {:class => 'form-control'}) %>
 	</div>
-	<div class="col-md-3">
-	  <%= select(:trip, :passengers, @passengers, {}, {:class => 'form-control'}) %>
+	<div class="col-md-2">
+	  <%= select(:trip, :passengers, @passengers, {selected: params[:trip][:passengers]}, {:class => 'form-control'}) %>
 	</div>
-	<div class="col-md-3">
-	  <%= select(:trip, :start_time, @dates, {}, {:class => 'form-control'}) %>
+	<div class="col-md-2">
+	  <%= select(:trip, :start_time, @dates, {include_blank: true, selected: params[:trip][:start_time]}, {:class => 'form-control'}) %>
+	</div>
+	<div class="col-md-2">
+	  <button type="submit" class="btn btn-primary">Search Flights</button>
 	</div>
       </div>
     <% end %>
-    <%= debug @start_airports %>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <table class="table">
+      <tr>
+	<th></th>
+	<th>Departs</th>
+	<th>Destination</th>
+	<th>Departure</th>
+	<th>Duration</th>
+      </tr>
+      <% if !@trips.nil? %>
+        <% @trips.each do |trip| %>
+          <tr>
+	    <td></td>
+	    <td><%= trip.from_airport.code %></td>
+	    <td><%= trip.to_airport.code %></td>
+	    <td><%= trip.start_time %></td>
+	    <td><%= trip.duration / 60 %></td>
+	  </tr>
+	<% end %>
+      <% end %>
+      
+    </table>
   </div>
 </div>
