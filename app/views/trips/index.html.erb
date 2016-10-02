@@ -28,26 +28,32 @@
 </div>
 <div class="row">
   <div class="col-md-12">
-    <table class="table">
-      <tr>
-	<th></th>
-	<th>Departs</th>
-	<th>Destination</th>
-	<th>Departure</th>
-	<th>Duration</th>
-      </tr>
-      <% if !@trips.nil? %>
-        <% @trips.each do |trip| %>
-          <tr>
-	    <td></td>
-	    <td><%= trip.from_airport.code %></td>
-	    <td><%= trip.to_airport.code %></td>
-	    <td><%= trip.start_time %></td>
-	    <td><%= trip.duration / 60 %></td>
-	  </tr>
-	<% end %>
-      <% end %>
-      
-    </table>
+    <%= form_for(@booking, method: :get) do |f| %>
+      <table class="table">
+	<tr>
+	  <th></th>
+	  <th>Departs</th>
+	  <th>Destination</th>
+	  <th>Departure</th>
+	  <th>Duration</th>
+	</tr>
+	<% if !@trips.nil? %>
+          <% @trips.each do |trip| %>
+            <tr>
+	      <td><%= f.radio_button('trip', trip.id) %></td>
+	      <td><%= trip.from_airport.code %></td>
+	      <td><%= trip.to_airport.code %></td>
+	      <td><%= trip.start_time %></td>
+	      <td><%= trip.duration / 60 %></td>
+	    </tr>
+	  <% end %>
+        <% end %>
+      </table>
+      <div class="row">
+	<div class="col-md-2 col-md-offset-10">
+	  <%= f.submit 'Book Trip', class: 'btn btn-success' %>
+	</div>
+      </div>
+    <% end %>
   </div>
 </div>
