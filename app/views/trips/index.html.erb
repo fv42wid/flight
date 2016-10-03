@@ -28,7 +28,7 @@
 </div>
 <div class="row">
   <div class="col-md-12">
-    <%= form_for(@booking, method: :get) do |f| %>
+    <%= form_tag('bookings/new', method: :get) do |f| %>
       <table class="table">
 	<tr>
 	  <th></th>
@@ -40,7 +40,7 @@
 	<% if !@trips.nil? %>
           <% @trips.each do |trip| %>
             <tr>
-	      <td><%= f.radio_button('trip', trip.id) %></td>
+	      <td><%= radio_button('booking', 'trip', trip.id) %></td>
 	      <td><%= trip.from_airport.code %></td>
 	      <td><%= trip.to_airport.code %></td>
 	      <td><%= trip.start_time %></td>
@@ -51,7 +51,7 @@
       </table>
       <div class="row">
 	<div class="col-md-2 col-md-offset-10">
-	  <%= f.submit 'Book Trip', class: 'btn btn-success' %>
+	  <button type="submit" class="btn btn-success">Book Trip</button>
 	</div>
       </div>
     <% end %>
