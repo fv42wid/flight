@@ -3,3 +3,44 @@
     <H1>Booking</h1>
   </div>
 </div>
+<div class="row">
+  <div class="col-md-12">
+    <%= form_for @booking do |f| %>
+      <%= f.hidden_field :trip_id, :value => @trip.id %>
+      <table class="table">
+	<thead>
+	  <tr>
+	    <th>Flight</th>
+	    <th>From</th>
+	    <th>To</th>
+	    <th>Time</th>
+	    <th>Duration</th>
+	  </tr>
+	</thead>
+	<tbody>
+	  <tr>
+	    <td><%= @trip.id %></td>
+	    <td><%= @trip.from_airport.code %></td>
+	    <td><%= @trip.to_airport.code %></td>
+	    <td><%= @trip.start_time %></td>
+	    <td><%= @trip.duration / 60 %></td>
+	  </tr>
+	</tbody>
+      </table>
+      <% @passenger_count.times do |i| %>
+        <%= f.fields_for :passengers do |passenger_form| %>
+	  <div class="form-group">
+	    <%= passenger_form.label :name, "Passenger #{i+1} Name" %>
+            <%= passenger_form.text_field :name, class: 'form-control' %>
+	  </div>
+	  <div class="form-group">
+	    <%= passenger_form.label :email, "Passenger #{i+1} Email" %>
+	    <%= passenger_form.text_field :email, class: 'form-control' %>
+	  </div>
+	  
+        <% end %>
+      <% end %>
+      <%= f.submit 'Book', class: 'btn btn-primary' %>
+    <% end %>
+  </div>
+</div>

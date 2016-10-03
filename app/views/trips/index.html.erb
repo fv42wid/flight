@@ -29,6 +29,7 @@
 <div class="row">
   <div class="col-md-12">
     <%= form_tag('bookings/new', method: :get) do |f| %>
+      <%= hidden_field_tag 'passengers', params[:trip][:passengers] || 1 %>
       <table class="table">
 	<tr>
 	  <th></th>
@@ -40,7 +41,7 @@
 	<% if !@trips.nil? %>
           <% @trips.each do |trip| %>
             <tr>
-	      <td><%= radio_button('booking', 'trip', trip.id) %></td>
+	      <td><%= radio_button('booking', 'trip_id', trip.id) %></td>
 	      <td><%= trip.from_airport.code %></td>
 	      <td><%= trip.to_airport.code %></td>
 	      <td><%= trip.start_time %></td>
