@@ -7,8 +7,14 @@ class BookingsController < ApplicationController
     @passenger_count.times {@booking.passengers.build}
   end
 
+  def create
+    @booking = Booking.create!(booking_params)
+    
+    
+  end
+
   private
     def booking_params
-      params.require(:booking).permit(:trip_id, :passengers, passengers_attributes: [:id, :name, :email])
+      params.require(:booking).permit(:trip_id, passengers_attributes: [:id, :name, :email])
     end
 end
