@@ -1,0 +1,43 @@
+<div class="row">
+  <table class="table">
+    <thead>
+      <tr>
+	<th>Flight</th>
+	<th>From</th>
+	<th>To</th>
+	<th>Time</th>
+	<th>Duration</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+	<td><%= @booking.trip.id %></td>
+	<td><%= @booking.trip.from_airport.code %></td>
+	<td><%= @booking.trip.to_airport.code %></td>
+	<td><%= @booking.trip.start_time %></td>
+	<td><%= @booking.trip.duration / 60 %></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <h3>Passengers</h3>
+    <table class="table">
+      <thead>
+	<tr>
+	  <th>Name</th>
+	  <th>Email</th>
+	</tr>
+      </thead>
+      <tbody>
+	<% @booking.passengers.each do |passenger| %>
+	  <tr>
+	    <td><%= passenger.name %></td>
+	    <td><%= passenger.email %></td>
+	  </tr>
+	<% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
